@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
 import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import FillingElementClass from './FillingElement.css'
+import styles from './filling-element.module.css'
+
 
 // определяем компонент FillingElement, который принимает объект данных в качестве аргумента
 const FillingElement = ({data}) => {
   // возвращаем элемент списка с иконкой перемещения и элементом конструктора, содержащим текст, цену и изображение
   return (
-    <li className='filling-element'>
+    <li className= {styles['filling-element']}>
       <DragIcon type="primary"/> 
-      <ConstructorElement className='filling-element'
+      <ConstructorElement className= {styles['filling-element']}
           text={data.name}
           price={data.price}
           thumbnail={data.image_mobile}

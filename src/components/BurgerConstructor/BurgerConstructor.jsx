@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import BurgerConstructorClass from './BurgerConstructor.css';
+import styles from './burger-constructor.module.css';
+import fillingElementStyles from './FillingElement/filling-element.module.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Box} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -22,8 +23,8 @@ const BurgerConstructor = ({data}) => {
 
   return (
     // Компонент отображает верхнюю булку с помощью ConstructorElement.
-    <section className="burger-constructor">
-      <div className="bun-element mr-4">
+    <section className= {styles["burger-constructor"]}>
+      <div className= {`${styles['bun-element']} mr-4`}>
         {bun && (
           <ConstructorElement
             type="top"
@@ -34,13 +35,13 @@ const BurgerConstructor = ({data}) => {
           />
         )}
       </div>
-      <ul className="burger-constructor-filling mt-4 mb-4">
+      <ul className= {`${styles['burger-constructor-filling']} mt-4 mb-4`}>
         {fillings.map(item => (
           // Далее происходит отображение начинки с помощью компонента FillingElement, который принимает данные об ингредиенте.
           <FillingElement key={item._id} data={item} />
         ))}
       </ul>
-      <div className="bun-element mr-4">
+      <div className= {`${styles['bun-element']} mr-4`}>
         {bun && (
           // Наконец, отображается нижняя булка с помощью ConstructorElement.
           <ConstructorElement
@@ -52,8 +53,8 @@ const BurgerConstructor = ({data}) => {
           />
         )}
       </div>
-      <div className="order-confirmation mt-10 mr-4">
-        <div className="total-cost">
+      <div className= {`${styles['order-confirmation']} mt-10 mr-4`}>
+        <div className={styles["total-cost"]}>
           <p className="text text_type_digits-medium">610</p>
           <CurrencyIcon />
         </div>

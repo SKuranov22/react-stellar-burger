@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
-import BurgerIngredientsStyles from './BurgerIngredients.css';
+import styles from './burger-Ingredients.module.css';
 import IngredientBox from './IngredientBox/IngredientBox'
 
 function BurgerIngredients({ data }) {
@@ -17,9 +17,10 @@ function BurgerIngredients({ data }) {
   ];
 
   return (
-    <section className="burger-ingredients pt-10">
+    <section className= {`${styles["burger-ingredients"]} pt-10`}>
       <h1 className="text text_type_main-large pb-5">Соберите бургер</h1> {/* Заголовок раздела */}
       <div style={{ display: "flex" }} className="pb-10"> {/* Блок с табами */}
+                                                                                <div className= {`${styles['order-confirmation']} mt-10 mr-4`}></div>
         {tabs.map((tab) => (
           <Tab
             key={tab.id}
@@ -32,7 +33,7 @@ function BurgerIngredients({ data }) {
           </Tab>
         ))}
       </div>
-      <div className="block-with-scroll"> {/* Блок с ингредиентами */}
+      <div className= {styles["block-with-scroll"]}> {/* Блок с ингредиентами */}
         {tabs.map((tab) => (
           <IngredientBox
             key={tab.id}

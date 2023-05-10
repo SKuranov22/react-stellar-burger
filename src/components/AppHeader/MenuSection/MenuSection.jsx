@@ -1,7 +1,7 @@
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import styles from './MenuSection.module.css';
+import styles from './menu-section.module.css';
 
 // определяем компонент MenuSection, который принимает два аргумента: текст и дочерние элементы
 function MenuSection({text, children}){

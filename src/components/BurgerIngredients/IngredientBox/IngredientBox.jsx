@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
-import ingredientStyles from './IngredientBox.css'
+import styles from './ingredient-box.module.css'
 import Modal from '../../Modal/Modal';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -26,16 +26,16 @@ function IngredientBox({ title, mealType, data }) {
   return (
     <div>
       <h2 className='text text_type_main-medium'>{title}</h2>
-      <ul className='ml-4 mr-4 ingredients-box'>
+      <ul className= {`ml-4 mr-4 ${styles['ingredients-box']}`}>
         {data
         // Фильтруем ингредиенты по типу блюда
           .filter((ingredient) => ingredient.type === mealType)
           .map((ingredient) => (
             // Обработчик клика на ингредиенте
-            <li className='ingredient' key={ingredient._id} onClick={() => handleIngredientClick(ingredient)}>
+            <li className= {styles['ingredient']} key={ingredient._id} onClick={() => handleIngredientClick(ingredient)}>
               <Counter count={1} size='default' extraClass='m-1' />
-              <img className='ingredient-img pl-4 pr-4 pb-1' src={ingredient.image} alt={ingredient.name} />
-              <div className='ingredient-price pb-1'>
+              <img className= {`${styles['ingredient-img']} pl-4 pr-4 pb-1`} src={ingredient.image} alt={ingredient.name} />
+              <div className= {`${styles['ingredient-price']} pb-1`}>
                 <p className='text text_type_digits-default'>{ingredient.price}</p>
                 <CurrencyIcon type='primary' />
               </div>

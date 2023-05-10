@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
+import styles from './app.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
@@ -40,10 +40,10 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className= {styles.app}>
       {/* Выводим заголовок приложения */}
       <AppHeader />
-      <main className='App-main'>
+      <main className= {styles['app-main']}>
         {/* Если isLoading установлено в true, то выводим сообщение о загрузке */}
         {isLoading ? <p>Loading...</p> : (
           <>
