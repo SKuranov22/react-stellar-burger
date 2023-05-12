@@ -56,7 +56,7 @@ const BurgerConstructor = ({ data }) => {
           <p className="text text_type_digits-medium">610</p>
           <CurrencyIcon />
         </div>
-        <Button type="primary" size="medium" onClick={handleOpenModal}>
+        <Button type="primary" size="medium" onClick={handleOpenModal} htmlType="button">
           Оформить заказ
         </Button>
       </div>
