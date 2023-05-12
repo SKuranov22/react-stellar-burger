@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './app.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
@@ -19,36 +19,39 @@ function App() {
       try {
         const response = await fetch('https://norma.nomoreparties.space/api/ingredients');
 
-        // Если ответ от сервера успешный, извлекаем данные и обновляем состояние приложения
-        if (response.ok) {
-          const { data } = await response.json();
-          setData(data);
-          setHasError(false);
-        } else {
-          // Если ответ от сервера отрицательный, устанавливаем hasError в значение true
-          setHasError(true);
+        // Проверяем ответ от сервера на корректность
+        if (!response.ok) {
+          throw new Error(`Ошибка ${response.status}`);
         }
-      } catch (error) {
-        // Если произошла ошибка, устанавливаем hasError в значение true
-        setHasError(true);
-      }
 
-      setIsLoading(false); // Устанавливаем isLoading в значение false после получения ответа с сервера
+        const { data } = await response.json();
+        setData(data);
+        setHasError(false);
+      } catch (error) {
+        setHasError(true);
+        console.error(error); // Выводим ошибку в консоль для отладки и обработки ошибок
+      } finally {
+        setIsLoading(false); // Устанавливаем isLoading в значение false после получения ответа с сервера
+      }
     };
 
     getData(); // Вызываем функцию getData
   }, []);
 
   return (
-    <div className= {styles.app}>
+    <div className={styles.app}>
       {/* Выводим заголовок приложения */}
       <AppHeader />
-      <main className= {styles['app-main']}>
+      <main className={styles['app-main']}>
         {/* Если isLoading установлено в true, то выводим сообщение о загрузке */}
-        {isLoading ? <p>Loading...</p> : (
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
           <>
             {/* Если hasError установлено в true, то выводим сообщение об ошибке */}
-            {hasError ? <p>Error occurred!</p> : (
+            {hasError ? (
+              <p>Error occurred!</p>
+            ) : (
               <>
                 {/* Если данные получены успешно, передаем их компонентам BurgerIngredients и BurgerConstructor */}
                 <BurgerIngredients data={data} />

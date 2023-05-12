@@ -20,6 +20,5 @@
   background-size: contain;
   background-color: transparent;
   border: none;
-  background-image: url(../../images/close.svg);
   cursor: pointer;
 }

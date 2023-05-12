@@ -1,39 +1,40 @@
 import React, { useEffect } from 'react';
-import ReactDom from "react-dom";
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from './modal.module.css';
-import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Typography, Box, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
-function Modal ({ open, children, handleClose }) {
-
-  // Эффект, который добавляет слушатель события keydown
+function Modal({ open, children, handleClose }) {
   useEffect(() => {
     const closeEsc = (e) => (e.key === 'Escape' ? handleClose() : null);
     document.addEventListener('keydown', closeEsc);
     return () => document.removeEventListener('keydown', closeEsc);
-  });
+  }, [handleClose]);
 
-  // Если значение open равно false, ничего не рендерим
   if (!open) return null;
 
-  // Используем метод createPortal из ReactDOM для рендера модального окна вне главного контейнера
-  return ReactDom.createPortal( 
+  return ReactDOM.createPortal(
     <>
-      <div className= {styles['modal']}>
-        <button className= {styles['close-button']} onClick={handleClose} />
+      <div className={styles.modal}>
+        <div className={styles['close-button']} onClick={handleClose}>
+          <CloseIcon type="primary" />
+        </div>
         {children}
       </div>
       <ModalOverlay handleClose={handleClose} />
     </>,
-   document.getElementById('portal')
-   )
+    document.getElementById('portal') // Рендер модального окна в портал с id 'portal'
+  );
 }
 
 Modal.propTypes = {
-  children: PropTypes.object.isRequired, 
-  handleClose: PropTypes.func.isRequired
-}
+  open: PropTypes.bool.isRequired, // Обязательное булевое значение, определяющее, открыто ли модальное окно
+  children: PropTypes.object.isRequired, // Обязательный компонент, являющийся содержимым модального окна
+  handleClose: PropTypes.func.isRequired, // Обязательная функция обратного вызова для закрытия модального окна
+};
 
-export default Modal ;
+export default Modal;
+
+
 

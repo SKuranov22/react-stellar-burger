@@ -22,9 +22,11 @@ const FillingElement = ({data}) => {
 
 // задаем propTypes для компонента, чтобы указать, какие свойства ожидаются
 FillingElement.propTypes = {
-  text: PropTypes.string,
-  price: PropTypes.number,
-  thumbnail: PropTypes.string,
-}
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.number,
+    image_mobile: PropTypes.string,
+  }),
+};
 
 export default FillingElement;
