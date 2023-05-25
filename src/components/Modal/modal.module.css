@@ -11,7 +11,7 @@
   width: 720px;
 }
 
-.close-button {
+.closeButton {
   position: absolute;
   top: 60px;
   right: 40px;
@@ -20,5 +20,6 @@
   background-size: contain;
   background-color: transparent;
   border: none;
+  background-image: url(../../images/close.svg);
   cursor: pointer;
 }

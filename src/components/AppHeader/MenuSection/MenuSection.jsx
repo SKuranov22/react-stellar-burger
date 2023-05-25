@@ -1,23 +1,16 @@
-import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
+import React from 'react';
+import styles from './MenuSection.module.css';
 
-import styles from './menu-section.module.css';
+function MenuSection({ text, children, active }) {
 
-// определяем компонент MenuSection, который принимает два аргумента: текст и дочерние элементы
-function MenuSection({text, children}){
-
-  // определяем классы стилей для секции и текста
-  const sectionClass = `${styles.section} link`;
-  const textClass = `${styles.text} text text_type_main-default`;
-
-  // возвращаем верстку для секции меню, содержащую иконку и текст
   return (
-    <a href='#' className={sectionClass}>
+    <a href='#' className={styles.section}>
       {children}
-      <p className={textClass}>{text}</p>
+      <p className={`${styles.text} ${active === true ? styles.active : ''} text text_type_main-default`}>
+        {text}
+      </p>
     </a>
-  )
-
+  );
 }
 
 export default MenuSection;

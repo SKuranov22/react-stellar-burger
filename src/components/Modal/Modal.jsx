@@ -1,40 +1,45 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import styles from './modal.module.css';
-import { Typography, Box, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
-function Modal({ open, children, handleClose }) {
+function Modal({ children, handleClose }) {
+  // Закрытие модального окна при нажатии на клавишу Escape
   useEffect(() => {
-    const closeEsc = (e) => (e.key === 'Escape' ? handleClose() : null);
-    document.addEventListener('keydown', closeEsc);
-    return () => document.removeEventListener('keydown', closeEsc);
+    const handleEscClose = (e) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscClose);
+    return () => {
+      document.removeEventListener('keydown', handleEscClose);
+    };
   }, [handleClose]);
 
-  if (!open) return null;
-
+  // Создание портала для модального окна
   return ReactDOM.createPortal(
     <>
-      <div className={styles.modal}>
-        <div className={styles['close-button']} onClick={handleClose}>
-          <CloseIcon type="primary" />
-        </div>
+      {/* Контейнер модального окна */}
+      <div className={`${styles.modal}`}>
+        {/* Кнопка закрытия модального окна */}
+        <button className={`${styles.closeButton}`} onClick={handleClose} />
+        {/* Дочерние элементы, переданные в компонент Modal */}
         {children}
       </div>
+      {/* Подложка для модального окна */}
       <ModalOverlay handleClose={handleClose} />
     </>,
-    document.getElementById('portal') // Рендер модального окна в портал с id 'portal'
+    document.getElementById('portal')
   );
 }
 
 Modal.propTypes = {
-  open: PropTypes.bool.isRequired, // Обязательное булевое значение, определяющее, открыто ли модальное окно
-  children: PropTypes.object.isRequired, // Обязательный компонент, являющийся содержимым модального окна
-  handleClose: PropTypes.func.isRequired, // Обязательная функция обратного вызова для закрытия модального окна
+  children: PropTypes.node.isRequired, // Ожидаем дочерние элементы
+  handleClose: PropTypes.func.isRequired, // Ожидаем функцию для закрытия модального окна
 };
 
 export default Modal;
-
-
 
