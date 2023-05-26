@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import styles from './Modal.module.css';
+import styles from './Modl.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
 function Modal({ children, handleClose }) {
