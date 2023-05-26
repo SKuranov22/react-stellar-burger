@@ -30,7 +30,3 @@ export const ingredientsConstructorReducer = (state = initialState, action) => {
   }
 };
 
-export const addIngredientInConstructor = (payload) => ({ type: ADD_INGREDIENT, payload });
-export const moveIngredientInConstructor = (payload) => ({ type: INGREDIENT_MOVE, payload });
-export const deleteIngredient = (payload) => ({ type: DELETE_INGREDIENT, payload });
-export const addBunsInConstructor = (payload) => ({ type: ADD_BUNS, payload });

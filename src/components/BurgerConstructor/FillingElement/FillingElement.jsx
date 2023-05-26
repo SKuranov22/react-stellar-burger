@@ -5,7 +5,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd/dist/hooks';
 import { useDispatch } from 'react-redux';
-import { moveIngredientInConstructor, deleteIngredient } from '../../../services/reducers/ingredients-constructor';
+import { moveIngredientInConstructor, deleteIngredient } from '../../../services/actions/ingredients-constructor';
 
 const FillingElement = ({ data, index, id }) => {
   const dispatch = useDispatch();

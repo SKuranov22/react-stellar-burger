@@ -3,7 +3,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../../../utils/PropTypes';
 import styles from './Ingredient.module.css';
-import { addIngredientInfo, deleteIngredientInfo } from '../../../../services/reducers/ingredient';
+import { addIngredientInfo, deleteIngredientInfo } from '../../../../services/actions/ingredient';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import IngredientDetails from '../../../IngredientDetails/IngredientDetails';

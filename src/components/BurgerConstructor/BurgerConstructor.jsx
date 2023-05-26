@@ -7,8 +7,8 @@ import FillingElement from './FillingElement/FillingElement';
 import BunElement from './BunElement/BunElement';
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredientInConstructor, addBunsInConstructor } from '../../services/reducers/ingredients-constructor';
-import { addOrderitems, deleteOrderInfo } from '../../services/reducers/order';
+import { addIngredientInConstructor, addBunsInConstructor } from '../../services/actions/ingredients-constructor';
+import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
 import { sentOrderInformation } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
 

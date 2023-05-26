@@ -25,5 +25,3 @@ export const orderReducer = (state = initialState, action) => {
   }
 }
 
-export const addOrderitems = (payload) => ({ type: ADD_ORDER_ITEMS, payload });
-export const deleteOrderInfo = () => ({ type: DELETE_ORDER_INFO })
