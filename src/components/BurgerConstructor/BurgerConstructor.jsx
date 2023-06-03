@@ -11,6 +11,7 @@ import { addIngredientInConstructor, addBunsInConstructor } from '../../services
 import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
 import { sentOrderInformation } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
+import { v4 as uuidv4 } from 'uuid'; // Импорт функции для генерации uuid
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -51,12 +52,18 @@ function BurgerConstructor() {
     accept: "ingredient",
     drop(item) {
       if (item.type === 'bun') {
-        dispatch(addBunsInConstructor([item, item]));
+        const newBuns = [
+          { ...item, id: uuidv4() }, // Генерация уникального UUID для первого булочного элемента
+          { ...item, id: uuidv4() } // Генерация уникального UUID для второго булочного элемента
+        ];
+        dispatch(addBunsInConstructor(newBuns));
       } else {
-        dispatch(addIngredientInConstructor([{ ...item, id: constructorIngredients.length }]));
+        const newIngredient = { ...item, id: uuidv4() }; // Генерация уникального UUID для ингредиента
+        dispatch(addIngredientInConstructor(newIngredient));
       }
     },
   });
+  
 
   // Определение состояния кнопки заказа
   const [buttonState, setButtonState] = useState(true);

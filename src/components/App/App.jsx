@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import styles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
@@ -17,12 +17,12 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className={`${styles.app}`}>
       <AppHeader /> {/* Компонент заголовка приложения */}
       {itemsLoaded === false ? (
         <div>Загрузка...</div> // Отображаем "Загрузка...", если данные еще не загружены
       ) : (
-        <main className='App-main'>
+        <main className={`${styles.appMain}`}>
           <DndProvider backend={HTML5Backend}>
             <BurgerIngredients /> {/* Компонент списка ингредиентов */}
             <BurgerConstructor /> {/* Компонент конструктора бургера */}
