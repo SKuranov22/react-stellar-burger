@@ -6,7 +6,6 @@ export const INGREDIENT_MOVE = 'INGREDIENT_MOVE';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT'
 export const ADD_BUNS = 'ADD_BUNS'
 
-
 export const addIngredientInConstructor = (ingredient) => {
   const newIngredient = {
     ...ingredient,
@@ -18,6 +17,7 @@ export const addIngredientInConstructor = (ingredient) => {
     payload: newIngredient // Используйте новый ингредиент с UUID в качестве payload
   };
 };
+
 export const moveIngredientInConstructor = (payload) => ({ type: INGREDIENT_MOVE, payload });
 export const deleteIngredient = (payload) => ({ type: DELETE_INGREDIENT, payload });
 export const addBunsInConstructor = (payload) => ({ type: ADD_BUNS, payload });

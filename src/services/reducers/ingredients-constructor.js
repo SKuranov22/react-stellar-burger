@@ -15,8 +15,7 @@ export const ingredientsConstructorReducer = (state = initialState, action) => {
         return { ...state, ingredients: [...state.ingredients, action.payload] }
     case DELETE_INGREDIENT:
       return { ...state, ingredients: [...state.ingredients.filter((item, index) => index !== action.payload)] }
-    case INGREDIENT_MOVE:
-      if (Array.isArray(action.payload)) {
+      case INGREDIENT_MOVE:
         return {
           ...state,
           ingredients: update(state.ingredients, {
@@ -26,11 +25,8 @@ export const ingredientsConstructorReducer = (state = initialState, action) => {
             ],
           }),
         }
-      } else {
+      default:
         return state;
-      }
-    default:
-      return state;
-  }
-};
+    }
+  };
 

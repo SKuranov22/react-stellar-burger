@@ -7,10 +7,10 @@ import FillingElement from './FillingElement/FillingElement';
 import BunElement from './BunElement/BunElement';
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredientInConstructor, addBunsInConstructor } from '../../services/actions/ingredients-constructor';
+import { addIngredientInConstructor, addBunsInConstructor, moveIngredientInConstructor } from '../../services/actions/ingredients-constructor';
 import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
 import { sentOrderInformation } from '../../services/actions/order';
-import { useDrop } from "react-dnd";
+import { useDrop, useDrag } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid'; // Импорт функции для генерации uuid
 
 function BurgerConstructor() {
@@ -52,14 +52,9 @@ function BurgerConstructor() {
     accept: "ingredient",
     drop(item) {
       if (item.type === 'bun') {
-        const newBuns = [
-          { ...item, id: uuidv4() }, // Генерация уникального UUID для первого булочного элемента
-          { ...item, id: uuidv4() } // Генерация уникального UUID для второго булочного элемента
-        ];
-        dispatch(addBunsInConstructor(newBuns));
+        dispatch(addBunsInConstructor([item, item]));
       } else {
-        const newIngredient = { ...item, id: uuidv4() }; // Генерация уникального UUID для ингредиента
-        dispatch(addIngredientInConstructor(newIngredient));
+        dispatch(addIngredientInConstructor({ ...item, id: uuidv4() }));
       }
     },
   });
@@ -90,7 +85,7 @@ function BurgerConstructor() {
           ) : (
             // Рендеринг списка ингредиентов
             constructorIngredients.map((item, index) => {
-              return <FillingElement data={item} key={index} index={index} id={item.id} />;
+              return <FillingElement data={item} key={item.id} index={index} id={item.id} />;
             })
           )}
         </ul>
