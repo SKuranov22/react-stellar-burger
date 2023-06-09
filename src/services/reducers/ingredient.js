@@ -18,4 +18,3 @@ export const ingredientReducer = (state = initialState, action) => {
     }
   }
 };
-

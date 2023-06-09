@@ -1,39 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Logo, BurgerIcon, ProfileIcon, ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link, useLocation } from 'react-router-dom';
 import MenuSection from './MenuSection/MenuSection';
 import styles from './AppHeader.module.css';
 
-class AppHeader extends React.Component {
-  render() {
-    return (
-      <header className={`${styles.appHeader} text text_type_main-default`}>
-        <menu className={`${styles.appHeaderMenu}`}>
-          <div className={`${styles.appHeaderMenuLeft}`}>
-            {/* Раздел "Конструктор" */}
-            <MenuSection text="Конструктор" active={true}>
-              <BurgerIcon type="primary" />
-            </MenuSection>
+function AppHeader() {
+  const location = useLocation();
 
-            {/* Раздел "Лента заказов" */}
-            <MenuSection text="Лента заказов">
-              <ListIcon type="secondary" />
-            </MenuSection>
-          </div>
+  return (
+    <header className={`${styles.appHeader} text text_type_main-default`}>
+      <menu className={styles.appHeaderMenu}>
+        <div className={styles.appHeaderMenuLeft}>
+          <MenuSection text="Конструктор" link={'/'} active={location.pathname === "/" ? true : false} >
+            <BurgerIcon type={location.pathname === "/" ? 'primary' : 'secondary'} />
+          </MenuSection>
+          <MenuSection text="Лента заказов" link={'/orders'} active={location.pathname === "/orders" ? true : false}>
+            <ListIcon type={location.pathname === "/orders" ? 'primary' : 'secondary'} />
+          </MenuSection>
+        </div>
+        <div className={styles.appHeaderLogo}><Logo /></div>
+        <div className={styles.appHeaderMenuRight}>
+          <MenuSection text="Личный кабинет" link={'/profile'} name={'profile'} active={location.pathname === "/profile" ? true : false} >
+            <ProfileIcon type={location.pathname === "/profile" ? 'primary' : 'secondary'} />
+          </MenuSection>
+        </div>
+      </menu>
+    </header>
+  )
 
-          <div className={`${styles.appHeaderLogo}`}>
-            <Logo />
-          </div>
-
-          <div className={`${styles.appHeaderMenuRight}`}>
-            {/* Раздел "Личный кабинет" */}
-            <MenuSection text="Личный кабинет">
-              <ProfileIcon type="secondary" />
-            </MenuSection>
-          </div>
-        </menu>
-      </header>
-    )
-  }
 }
 
 export default AppHeader;
