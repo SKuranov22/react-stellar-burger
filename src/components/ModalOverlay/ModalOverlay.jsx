@@ -1,20 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../Modal/Modal';
-import styles from './modal-overlay.module.css';
+import styles from './ModalOverlay.module.css';
 
-// Компонент оверлея для модального окна
-function ModalOverlay({handleClose}) {
-  // Возвращает оверлей с функцией закрытия при клике
+function ModalOverlay({ handleClose }) {
   return (
-    <div className= {styles['modal-overlay']} onClick={handleClose}>
-    </div>
+    <div className={`${styles.modalOverlay}`} onClick={handleClose}></div>
   );
 }
 
-// Проверка типов пропсов
 ModalOverlay.propTypes = {
   handleClose: PropTypes.func.isRequired
-}
+};
 
 export default ModalOverlay;

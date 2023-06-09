@@ -1,10 +1,6 @@
-.filling-element {
+.total {
   display: flex;
   flex-direction: row;
+  gap: 9.5px;
   align-items: center;
-  gap: 8px;
-  width: 572px;
 }
-
-
-

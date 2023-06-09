@@ -1,77 +1,112 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styles from './burger-constructor.module.css';
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useState, useEffect, useMemo } from 'react';
+import styles from './BurgerConstructor.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import FillingElement from './FillingElement/FillingElement';
+import BunElement from './BunElement/BunElement';
+import TotalPrice from '../TotalPrice/TotalPrice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addIngredientInConstructor, addBunsInConstructor, moveIngredientInConstructor } from '../../services/actions/ingredients-constructor';
+import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
+import { sentOrderInformation } from '../../services/actions/order';
+import { useDrop, useDrag } from "react-dnd";
+import { v4 as uuidv4 } from 'uuid'; // Импорт функции для генерации uuid
 
-const BurgerConstructor = ({ data }) => {
-  const [modalActive, setModalActive] = useState(false); // Состояние для открытия/закрытия модального окна
-  const buns = data.filter(item => item.type === 'bun');
-  const bun = buns.length ? buns[0] : null;
-  const fillings = data.filter(item => item.type !== 'bun');
+function BurgerConstructor() {
+  const dispatch = useDispatch();
 
-  const handleOpenModal = () => {
-    setModalActive(true); // Функция для открытия модального окна при клике на кнопку
-  };
+  // Получение данных из Redux хранилища
+  const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); // Данные в конструкторе
+  const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
 
-  const handleCloseModal = () => {
-    setModalActive(false); // Функция для закрытия модального окна
-  };
+  const [modalActive, setModalActive] = useState(false);
+
+  // Вычисление общей стоимости с использованием useMemo для оптимизации
+  const total = useMemo(
+    () => {
+      let total = 0;
+      constructorIngredients.forEach((item) => { total += item.price });
+      constructorBuns.forEach((item) => { total += item.price });
+      return total;
+    },
+    [constructorIngredients, constructorBuns]
+  );
+
+  // Функция для подтверждения заказа
+  function orderConfirmation() {
+    const orderArray = [...constructorIngredients, ...constructorBuns];
+    dispatch(addOrderitems(orderArray));
+    dispatch(sentOrderInformation(orderArray));
+    setModalActive(true);
+  }
+
+  // Функция для закрытия модального окна
+  function closeModal() {
+    dispatch(deleteOrderInfo());
+    setModalActive(false);
+  }
+
+  // Использование хука useDrop для обработки перетаскивания ингредиентов
+  const [, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      if (item.type === 'bun') {
+        dispatch(addBunsInConstructor([item, item]));
+      } else {
+        dispatch(addIngredientInConstructor({ ...item, id: uuidv4() }));
+      }
+    },
+  });
+  
+
+  // Определение состояния кнопки заказа
+  const [buttonState, setButtonState] = useState(true);
+  useEffect(() => {
+    if (constructorBuns.length === 0 || constructorIngredients.length === 0) {
+      setButtonState(true);
+    } else if (constructorBuns.length > 0 && constructorIngredients.length > 0) {
+      setButtonState(false);
+    }
+  }, [constructorBuns, constructorIngredients]);
 
   return (
-    <section className={styles['burger-constructor']}>
-      <div className={`${styles['bun-element']} mr-4`}>
-        {bun && (
-          <ConstructorElement
-            type="top"
-            isLocked
-            text={`${bun.name} (верх)`}
-            price={bun.price}
-            thumbnail={bun.image_mobile}
-          />
-        )}
-      </div>
-      <ul className={`${styles['burger-constructor-filling']} mt-4 mb-4`}>
-        {fillings.map(item => (
-          <FillingElement key={item._id} data={item} />
-        ))}
-      </ul>
-      <div className={`${styles['bun-element']} mr-4`}>
-        {bun && (
-          <ConstructorElement
-            type="bottom"
-            isLocked
-            text={`${bun.name} (низ)`}
-            price={bun.price}
-            thumbnail={bun.image_mobile}
-          />
-        )}
-      </div>
-      <div className={`${styles['order-confirmation']} mt-10 mr-4`}>
-        <div className={styles['total-cost']}>
-          <p className="text text_type_digits-medium">610</p>
-          <CurrencyIcon />
+    <>
+      <section ref={dropTarget} className={`${styles.burgerConstructor}`}>
+        <div className={`${styles.bun} mr-4`}>
+          <BunElement type={"top"} isLocked={true} />
         </div>
-        <Button type="primary" size="medium" onClick={handleOpenModal} htmlType="button">
-          Оформить заказ
-        </Button>
-      </div>
-      {modalActive && (
-        <Modal open={modalActive} handleClose={handleCloseModal}>
-          <OrderDetails />
-        </Modal>
-      )}
-    </section>
-  );
-};
 
-BurgerConstructor.propTypes = {
-  data: PropTypes.array.isRequired,
-};
+        <ul className={`${styles.filling} mt-4 mb-4`}>
+          {constructorIngredients.length === 0 ? (
+            <div className={`${styles.addIngredient} text text_type_main-large pb-8`}>
+              Добавь Ингредиент!
+            </div>
+          ) : (
+            // Рендеринг списка ингредиентов
+            constructorIngredients.map((item, index) => {
+              return <FillingElement data={item} key={item.id} index={index} id={item.id} />;
+            })
+          )}
+        </ul>
+
+        <div className={`${styles.bun} mr-4`}>
+          <BunElement type={"bottom"} isLocked={true} />
+        </div>
+        <div className={`${styles.orderConfirmation} mt-10 mr-4`}>
+          <TotalPrice totalPrice={total} />
+          <Button disabled={buttonState} type="primary" size="medium" htmlType="button" onClick={() => orderConfirmation()}>
+            Оформить заказ
+          </Button>
+        </div>
+        {modalActive && (
+          <Modal handleClose={() => closeModal()}>
+            <OrderDetails />
+          </Modal>
+        )}
+      </section>
+    </>
+  );
+}
 
 export default BurgerConstructor;
-
