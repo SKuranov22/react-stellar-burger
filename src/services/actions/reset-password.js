@@ -1,4 +1,4 @@
-import { postForgotPassword, postResetPassword } from '../../API/api'
+import { postForgotPassword, postResetPassword } from '../../API/api';
 
 export const VERIFICATION_EMAIL_REQUEST = 'VERIFICATION_EMAIL_REQUEST';
 export const VERIFICATION_EMAIL_SUCCESS = 'VERIFICATION_EMAIL_SUCCESS';//впервые получаем данные пользователя, токены и сохраняем куки.
@@ -19,16 +19,16 @@ export function sentVerificationEmail(email, goToPage) {
           dispatch({
             type: VERIFICATION_EMAIL_SUCCESS,
             payload: res
-          })
+          });
         }
       })
-      .then(goToPage())
+      .then(() => goToPage())
       .catch(e => {
         dispatch({
           type: VERIFICATION_EMAIL_FAILED,
         });
-      })
-  }
+      });
+  };
 }
 
 export function resetPassword(password, token) {
@@ -36,16 +36,18 @@ export function resetPassword(password, token) {
     dispatch({
       type: RESET_PASSWORD_REQUEST
     });
-    postResetPassword(password, token).then(res => {
-      if (res && res.success) {
+    postResetPassword(password, token)
+      .then(res => {
+        if (res && res.success) {
+          dispatch({
+            type: RESET_PASSWORD_SUCCESS,
+          });
+        }
+      })
+      .catch(e => {
         dispatch({
-          type: RESET_PASSWORD_SUCCESS,
+          type: RESET_PASSWORD_FAILED,
         });
-      }
-    }).catch(e => {
-      dispatch({
-        type: RESET_PASSWORD_FAILED,
       });
-    })
-  }
+  };
 }
