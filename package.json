@@ -1,5 +1,5 @@
 {
-  "name": "react-burger",
+  "name": "react-stellar-burger",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,7 +11,7 @@
     "@types/node": "^16.18.2",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
-    "@ya.praktikum/react-developer-burger-ui-components": "^1.13.5",
+    "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "immutability-helper": "^3.1.1",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
@@ -19,8 +19,8 @@
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.4.1",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.12.1",
-    "react-scripts": "^5.0.1",
+    "react-router-dom": "^6.6.2",
+    "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
     "typescript": "^4.8.4",
@@ -50,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.1"
   }
 }
