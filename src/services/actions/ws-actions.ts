@@ -7,6 +7,14 @@ export const WS_CONNECTION_CLOSED: 'WS_CONNECTION_CLOSED' = 'WS_CONNECTION_CLOSE
 
 export const WS_GET_ORDERS: 'WS_GET_ORDERS' = 'WS_GET_ORDERS';
 
+// export type TWsActionsTypes = {
+//   WS_CONNECTION_START: string,
+//   WS_CONNECTION_SUCCESS: string,
+//   WS_CONNECTION_ERROR: string,
+//   WS_CONNECTION_CLOSED: string,
+//   WS_GET_ORDERS: string,
+// }
+
 //типизация экшенов
 export interface IWsConnectionStart {
   readonly type: typeof WS_CONNECTION_START;

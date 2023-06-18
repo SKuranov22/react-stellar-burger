@@ -20,7 +20,7 @@ const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((store) => store.userInfo);
-  const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); // данные в конструкторе
+  const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
   const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
   const orderIsLoaded = useSelector((store) => store.orderInformation.isLoaded);
 
@@ -30,16 +30,14 @@ const BurgerConstructor: FC = () => {
     () => {
       let total = 0;
       constructorIngredients.map((item: TIngredient) => { total = total + item.price });
-      constructorBuns.map((item: TIngredient) => { total = total + item.price });
       return total;
     },
     [constructorIngredients, constructorBuns]
   );
 
-  // Функция для подтверждения заказа
   function orderConfirmation() {
     if (!isAuthenticated) {
-      return navigate('/login'); // Переход на страницу входа, если пользователь не аутентифицирован
+      return (navigate('/login'))
     }
     if (isAuthenticated) {
       const orderArray = [...constructorIngredients, ...constructorBuns].map(item => item._id);
@@ -49,14 +47,12 @@ const BurgerConstructor: FC = () => {
     }
   }
 
-  // Функция для закрытия модального окна
   function closeModal() {
     dispatch(deleteOrderInfo());
     dispatch(deleteAllIngredients());
     setModalActive(false);
   }
 
-  // Использование хука useDrop для определения области сброса ингредиентов
   const [, dropTarget] = useDrop({
     accept: "ingredient",
     drop(item: TIngredient) {
@@ -72,11 +68,11 @@ const BurgerConstructor: FC = () => {
 
   useEffect(() => {
     if (constructorBuns.length === 0 || constructorIngredients.length === 0) {
-      setbuttonState(true);
-    } else if (constructorBuns.length > 0 && constructorIngredients.length > 0) {
-      setbuttonState(false);
+      setbuttonState(true)
+    } else if ((constructorBuns.length > 0 && constructorIngredients.length > 0)) {
+      setbuttonState(false)
     }
-  }, [constructorBuns, constructorIngredients]);
+  }, [constructorBuns, constructorIngredients])
 
   return (
     <>
@@ -86,15 +82,12 @@ const BurgerConstructor: FC = () => {
         </div>
 
         <ul className={`${styles.filling} mt-4 mb-4`}>
-          {constructorIngredients.length === 0 ? (
-            <div className={`${styles.addIngredient} text text_type_main-large pb-8`}>
-              Добавь Ингредиент!
-            </div>
-          ) : (
-            constructorIngredients.map((item, index) => {
-              return <FillingElement data={item} key={item.id} index={index} id={item.id!} />;
+          {constructorIngredients.length === 0
+            ? <div className={`${styles.addIngredient} text text_type_main-large pb-8`}>Добавь Ингредиент!</div>
+            : constructorIngredients.map((item, index) => {
+              return <FillingElement data={item} key={item.id} index={index} id={item.id!} />
             })
-          )}
+          }
         </ul>
 
         <div className={`${styles.bun} mr-4`}>
@@ -106,11 +99,12 @@ const BurgerConstructor: FC = () => {
             Оформить заказ
           </Button>
         </div>
-        {modalActive && (
+        {
+          modalActive &&
           <Modal handleClose={closeModal}>
             <OrderDetails />
           </Modal>
-        )}
+        }
       </section>
     </>
   );

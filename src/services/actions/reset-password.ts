@@ -74,6 +74,7 @@ export const sentVerificationEmail: AppThunk = (email: string, goToPage: ()=>voi
       .then(res => {
         if (res && res.success) {
           dispatch(verificationEmailSuccess(res))
+          console.log(res)
         }
       })
       .then(goToPage)
@@ -84,7 +85,7 @@ export const sentVerificationEmail: AppThunk = (email: string, goToPage: ()=>voi
 }
 
 export function resetPassword(password: string, token: string) {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch) {
     dispatch(resetPasswordRequest());
     postResetPassword(password, token).then(res => {
       if (res && res.success) {

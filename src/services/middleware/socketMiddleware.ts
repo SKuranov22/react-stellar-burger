@@ -10,8 +10,9 @@ type TWsActions = {
   onError: string,
   getOrders: string
 }
-
+// не особо понимаю эту типизацию -_-
 export const socketMiddleware = (wsUrl: string, wsActions: TWsActions, auth: boolean): Middleware<{}, RootState> => {
+ // через store: MiddlewareAPI<AppDispatch, RootState> не работало, наставник подсказал типизировать Middleware<{}, RootState> 
   return (store) => {
     let socket: WebSocket | null = null;
 

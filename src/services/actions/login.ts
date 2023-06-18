@@ -182,7 +182,6 @@ export const getUserData: AppThunk = () => {
       }
     }).catch(e => {
       dispatch(userDataFailed());
-      // до этого вызывался как dispatch(refreshToken())
       refreshToken();
     })
   }
@@ -209,7 +208,6 @@ export const refreshToken: AppThunk = () => {
         dispatch(refreshAccessTokenSuccess(res));
         setCookie('accessToken', res.accessToken.split('Bearer ')[1]);
         setCookie('refreshToken', res.refreshToken);
-        // до этого вызывался как dispatch(getUserData())
         getUserData();
       }
     }).catch(e => {

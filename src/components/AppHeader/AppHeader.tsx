@@ -11,38 +11,24 @@ const AppHeader: FC = () => {
   return (
     <header className={`${styles.appHeader} text text_type_main-default`}>
       <menu className={styles.appHeaderMenu}>
-
-        {/* Левая часть меню */}
         <div className={styles.appHeaderMenuLeft}>
-
-          {/* Секция "Конструктор" */}
           <MenuSection text="Конструктор" link={'/'} active={location.pathname === "/" ? true : false} >
             <BurgerIcon type={location.pathname === "/" ? 'primary' : 'secondary'} />
           </MenuSection>
-
-          {/* Секция "Лента заказов" */}
           <MenuSection text="Лента заказов" link={'/feed'} active={location.pathname === "/feed" ? true : false}>
             <ListIcon type={location.pathname === "/feed" ? 'primary' : 'secondary'} />
           </MenuSection>
-
         </div>
-
-        {/* Логотип */}
         <div className={styles.appHeaderLogo}><Logo /></div>
-
-        {/* Правая часть меню */}
         <div className={styles.appHeaderMenuRight}>
-
-          {/* Секция "Личный кабинет" */}
           <MenuSection text="Личный кабинет" link={'/profile'} active={location.pathname === "/profile" ? true : false} >
             <ProfileIcon type={location.pathname === "/profile" ? 'primary' : 'secondary'} />
           </MenuSection>
-
         </div>
-
       </menu>
     </header>
   )
+
 }
 
 export default AppHeader;

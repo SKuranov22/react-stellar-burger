@@ -13,7 +13,7 @@ import { TWsAuthActions } from "../services/actions/ws-auth-actions";
 import { rootReducer } from "../services/reducers/rootReducer";
 
 
-// Типизация стора
+//типизация стора
 export type RootState = ReturnType<typeof rootReducer>;
 
 // Все экшены приложения
