@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { ingredientPropTypes } from '../../../../utils/PropTypes';
 import styles from './Ingredient.module.css'
 import { addIngredientInfo } from '../../../../services/actions/ingredient';
 import { useDispatch, useSelector } from '../../../../types/hooks';

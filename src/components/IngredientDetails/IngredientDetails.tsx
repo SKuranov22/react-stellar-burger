@@ -6,8 +6,8 @@ import { FC } from 'react';
 import { TIngredient } from '../../types/types';
 
 const IngredientDetails: FC<{data: Array<TIngredient>}> = ( {data} ) => {
-  const { id } = useParams(); // Получение параметра `id` из URL
-  const ingredientInfo = data.find(item => item._id === id); // Поиск информации об ингредиенте по `id`
+  const { id } = useParams();
+  const ingredientInfo = data.find(item => item._id === id);
 
   return (
     <>
@@ -41,4 +41,3 @@ const IngredientDetails: FC<{data: Array<TIngredient>}> = ( {data} ) => {
 }
 
 export default IngredientDetails;
-

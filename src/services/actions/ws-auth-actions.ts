@@ -7,6 +7,14 @@ export const WS_AUTH_CONNECTION_CLOSED: 'WS_AUTH_CONNECTION_CLOSED' = 'WS_AUTH_C
 
 export const WS_GET_AUTH_ORDERS: 'WS_GET_AUTH_ORDERS' = 'WS_GET_AUTH_ORDERS';
 
+// export type TWsAuthActionsTypes = {
+//   WS_AUTH_CONNECTION_START: string,
+//   WS_AUTH_CONNECTION_SUCCESS: string,
+//   WS_AUTH_CONNECTION_ERROR: string,
+//   WS_AUTH_CONNECTION_CLOSED: string,
+//   WS_GET_AUTH_ORDERS: string,
+// }
+
 //типизация экшенов
 export interface IWsAuthConnectionStart {
   readonly type: typeof WS_AUTH_CONNECTION_START;

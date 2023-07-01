@@ -11,6 +11,7 @@ const Profile: FC = () => {
   const navigate = useNavigate();
 
   const logOut = () => {
+    // setCurrent(e.target.name);
     dispatch(userLogout(() => navigate('/login')));
   }
 
