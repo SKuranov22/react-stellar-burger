@@ -1,11 +1,8 @@
-import { ingredientReducer } from '../ingredient';
+import { ingredientReducer, initialState } from '../ingredient';
 import { addIngredientInfo, deleteIngredientInfo } from '../../actions/ingredient';
 
 describe('Ingredient Reducer', () => {
   it('should return the initial state', () => {
-    const initialState = {
-      information: null
-    };
 
     expect(ingredientReducer(undefined, {})).toEqual(initialState);
   });

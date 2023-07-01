@@ -1,4 +1,4 @@
-import { userInfoReducer } from '../login';
+import { userInfoReducer, initialState } from '../login';
 import {
   userLoginRequest,
   userLoginSuccess,
@@ -16,50 +16,17 @@ import {
 } from '../../actions/login';
 
 describe('Login Reducer', () => {
-  it('should return the initial state', () => {
-    const initialState = {
-      loginRequest: false,
-      loginRequestFailed: false,
-      userDataLoaded: false,
-      userDataRequest: false,
-      userDataRequestFailed: false,
-      userDataUpdateRequest: false,
-      userDataUpdateFailed: false,
-      accessTokenRequest: false,
-      accessTokenRequestFailed: false,
-      isAuthenticated: false,
-      user: {
-        email: '',
-        name: '',
-      },
-      accessToken: '',
-      refreshToken: '',
-    };
+  const initialUserState = {
+    email: '',
+    name: '',
+  };
 
+  it('should return the initial state', () => {
     expect(userInfoReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle USER_LOGIN_REQUEST', () => {
     const action = userLoginRequest();
-
-    const initialState = {
-      loginRequest: false,
-      loginRequestFailed: false,
-      userDataLoaded: false,
-      userDataRequest: false,
-      userDataRequestFailed: false,
-      userDataUpdateRequest: false,
-      userDataUpdateFailed: false,
-      accessTokenRequest: false,
-      accessTokenRequestFailed: false,
-      isAuthenticated: false,
-      user: {
-        email: '',
-        name: '',
-      },
-      accessToken: '',
-      refreshToken: '',
-    };
 
     const expectedState = {
       ...initialState,
@@ -78,25 +45,6 @@ describe('Login Reducer', () => {
     const refreshToken = 'refresh-token';
     const action = userLoginSuccess({ user, accessToken, refreshToken });
 
-    const initialState = {
-      loginRequest: true,
-      loginRequestFailed: false,
-      userDataLoaded: false,
-      userDataRequest: false,
-      userDataRequestFailed: false,
-      userDataUpdateRequest: false,
-      userDataUpdateFailed: false,
-      accessTokenRequest: false,
-      accessTokenRequestFailed: false,
-      isAuthenticated: false,
-      user: {
-        email: '',
-        name: '',
-      },
-      accessToken: '',
-      refreshToken: '',
-    };
-
     const expectedState = {
       ...initialState,
       loginRequest: false,
@@ -112,25 +60,6 @@ describe('Login Reducer', () => {
 
   it('should handle USER_LOGIN_FAILED', () => {
     const action = userLoginFailed();
-
-    const initialState = {
-      loginRequest: true,
-      loginRequestFailed: false,
-      userDataLoaded: false,
-      userDataRequest: false,
-      userDataRequestFailed: false,
-      userDataUpdateRequest: false,
-      userDataUpdateFailed: false,
-      accessTokenRequest: false,
-      accessTokenRequestFailed: false,
-      isAuthenticated: false,
-      user: {
-        email: '',
-        name: '',
-      },
-      accessToken: '',
-      refreshToken: '',
-    };
 
     const expectedState = {
       ...initialState,

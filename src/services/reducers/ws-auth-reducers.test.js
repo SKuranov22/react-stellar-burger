@@ -1,4 +1,4 @@
-import { wsAuthReducer } from '../ws-auth-reducers';
+import { wsAuthReducer, initialState } from '../ws-auth-reducers';
 import {
   WS_AUTH_CONNECTION_SUCCESS,
   WS_AUTH_CONNECTION_ERROR,
@@ -8,51 +8,35 @@ import {
 
 describe('wsAuthReducer', () => {
   it('should return the initial state', () => {
-    const initialState = {
-      wsAuthConnected: false,
-      wsAuthError: undefined,
-      orders: null,
-      total: 0,
-      totalToday: 0
-    };
     expect(wsAuthReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle WS_AUTH_CONNECTION_SUCCESS', () => {
     const action = { type: WS_AUTH_CONNECTION_SUCCESS };
     const expectedState = {
+      ...initialState,
       wsAuthConnected: true,
-      wsAuthError: undefined,
-      orders: null,
-      total: 0,
-      totalToday: 0
     };
-    expect(wsAuthReducer(undefined, action)).toEqual(expectedState);
+    expect(wsAuthReducer(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle WS_AUTH_CONNECTION_ERROR', () => {
     const error = 'Connection error';
     const action = { type: WS_AUTH_CONNECTION_ERROR, payload: error };
     const expectedState = {
-      wsAuthConnected: false,
+      ...initialState,
       wsAuthError: error,
-      orders: null,
-      total: 0,
-      totalToday: 0
     };
-    expect(wsAuthReducer(undefined, action)).toEqual(expectedState);
+    expect(wsAuthReducer(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle WS_AUTH_CONNECTION_CLOSED', () => {
     const action = { type: WS_AUTH_CONNECTION_CLOSED };
     const expectedState = {
+      ...initialState,
       wsAuthConnected: false,
-      wsAuthError: undefined,
-      orders: null,
-      total: 0,
-      totalToday: 0
     };
-    expect(wsAuthReducer(undefined, action)).toEqual(expectedState);
+    expect(wsAuthReducer(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle WS_GET_AUTH_ORDERS', () => {
@@ -64,12 +48,11 @@ describe('wsAuthReducer', () => {
       payload: { orders, total, totalToday }
     };
     const expectedState = {
-      wsAuthConnected: false,
-      wsAuthError: undefined,
+      ...initialState,
       orders,
       total,
       totalToday
     };
-    expect(wsAuthReducer(undefined, action)).toEqual(expectedState);
+    expect(wsAuthReducer(initialState, action)).toEqual(expectedState);
   });
 });

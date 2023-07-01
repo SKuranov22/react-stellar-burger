@@ -1,4 +1,4 @@
-import { wsReducer } from '../ws-reducers';
+import { wsReducer, initialState } from '../ws-reducers';
 import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
@@ -8,51 +8,36 @@ import {
 
 describe('wsReducer', () => {
   it('should return the initial state', () => {
-    const initialState = {
-      wsConnected: false,
-      wsError: undefined,
-      orders: null,
-      total: 0,
-      totalToday: 0
-    };
     expect(wsReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle WS_CONNECTION_SUCCESS', () => {
     const action = { type: WS_CONNECTION_SUCCESS };
     const expectedState = {
+      ...initialState,
       wsConnected: true,
-      wsError: undefined,
-      orders: null,
-      total: 0,
-      totalToday: 0
     };
-    expect(wsReducer(undefined, action)).toEqual(expectedState);
+    expect(wsReducer(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle WS_CONNECTION_ERROR', () => {
     const error = 'Connection error';
     const action = { type: WS_CONNECTION_ERROR, payload: error };
     const expectedState = {
+      ...initialState,
       wsConnected: false,
       wsError: error,
-      orders: null,
-      total: 0,
-      totalToday: 0
     };
-    expect(wsReducer(undefined, action)).toEqual(expectedState);
+    expect(wsReducer(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle WS_CONNECTION_CLOSED', () => {
     const action = { type: WS_CONNECTION_CLOSED };
     const expectedState = {
+      ...initialState,
       wsConnected: false,
-      wsError: undefined,
-      orders: null,
-      total: 0,
-      totalToday: 0
     };
-    expect(wsReducer(undefined, action)).toEqual(expectedState);
+    expect(wsReducer(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle WS_GET_ORDERS', () => {
@@ -64,12 +49,12 @@ describe('wsReducer', () => {
       payload: { orders, total, totalToday }
     };
     const expectedState = {
-      wsConnected: false,
-      wsError: undefined,
+      ...initialState,
       orders,
       total,
       totalToday
     };
-    expect(wsReducer(undefined, action)).toEqual(expectedState);
+    expect(wsReducer(initialState, action)).toEqual(expectedState);
   });
 });
+

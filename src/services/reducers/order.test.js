@@ -1,4 +1,4 @@
-import { orderReducer } from '../order';
+import { orderReducer, initialState } from '../order';
 import {
   getOrderNumberRequest,
   getOrderNumberSuccess,
@@ -9,27 +9,11 @@ import {
 
 describe('Order Reducer', () => {
   it('should return the initial state', () => {
-    const initialState = {
-      orderNumber: null,
-      orderNumberRequest: false,
-      orderNumberFailed: false,
-      isLoaded: false,
-      orderItems: [],
-    };
-
     expect(orderReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle GET_ORDER_NUMBER_REQUEST', () => {
     const action = getOrderNumberRequest();
-
-    const initialState = {
-      orderNumber: null,
-      orderNumberRequest: false,
-      orderNumberFailed: false,
-      isLoaded: false,
-      orderItems: [],
-    };
 
     const expectedState = {
       ...initialState,
@@ -42,14 +26,6 @@ describe('Order Reducer', () => {
   it('should handle GET_ORDER_NUMBER_SUCCESS', () => {
     const orderNumber = 12345;
     const action = getOrderNumberSuccess(orderNumber);
-
-    const initialState = {
-      orderNumber: null,
-      orderNumberRequest: true,
-      orderNumberFailed: false,
-      isLoaded: false,
-      orderItems: [],
-    };
 
     const expectedState = {
       ...initialState,
@@ -65,14 +41,6 @@ describe('Order Reducer', () => {
   it('should handle GET_ORDER_NUMBER_FAILED', () => {
     const action = getOrderNumberFailed();
 
-    const initialState = {
-      orderNumber: null,
-      orderNumberRequest: true,
-      orderNumberFailed: false,
-      isLoaded: false,
-      orderItems: [],
-    };
-
     const expectedState = {
       ...initialState,
       orderNumberRequest: false,
@@ -85,14 +53,6 @@ describe('Order Reducer', () => {
   it('should handle ADD_ORDER_ITEMS', () => {
     const orderItems = ['item1', 'item2'];
     const action = addOrderItems(orderItems);
-
-    const initialState = {
-      orderNumber: null,
-      orderNumberRequest: false,
-      orderNumberFailed: false,
-      isLoaded: false,
-      orderItems: [],
-    };
 
     const expectedState = {
       ...initialState,
@@ -114,6 +74,7 @@ describe('Order Reducer', () => {
     };
 
     const expectedState = {
+      ...initialState,
       orderNumber: null,
       orderNumberRequest: false,
       orderNumberFailed: false,
@@ -127,3 +88,4 @@ describe('Order Reducer', () => {
   // И прочие тесты...
 
 });
+

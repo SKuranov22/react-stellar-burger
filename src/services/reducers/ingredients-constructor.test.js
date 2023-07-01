@@ -1,4 +1,4 @@
-import { ingredientsConstructorReducer } from '../ingredients-constructor';
+import { ingredientsConstructorReducer, initialState } from '../ingredients-constructor';
 import {
   addIngredient,
   moveIngredient,
@@ -9,10 +9,6 @@ import {
 
 describe('Ingredients Constructor Reducer', () => {
   it('should return the initial state', () => {
-    const initialState = {
-      ingredients: [],
-      buns: [],
-    };
 
     expect(ingredientsConstructorReducer(undefined, {})).toEqual(initialState);
   });
@@ -32,11 +28,6 @@ describe('Ingredients Constructor Reducer', () => {
   it('should handle ADD_INGREDIENT', () => {
     const ingredient = { id: '2', name: 'Tomato', price: 0.99 };
     const action = addIngredient(ingredient);
-
-    const initialState = {
-      ingredients: [],
-      buns: [],
-    };
 
     const expectedState = {
       ingredients: [ingredient],

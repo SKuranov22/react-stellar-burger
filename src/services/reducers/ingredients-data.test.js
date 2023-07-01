@@ -1,4 +1,4 @@
-import { ingredientsReducer } from '../ingredients-data';
+import { ingredientsReducer, initialState } from '../ingredients-data';
 import {
   getIngredientsRequest,
   getIngredientsSuccess,
@@ -6,32 +6,22 @@ import {
 } from '../../actions/ingredients-data';
 
 describe('Ingredients Data Reducer', () => {
-  it('should return the initial state', () => {
-    const initialState = {
-      items: null,
-      itemsRequest: false,
-      itemsFailed: false,
-      itemsLoaded: false,
-    };
+  const initialItemsState = {
+    items: null,
+    itemsRequest: true,
+    itemsFailed: false,
+    itemsLoaded: false,
+  };
 
+  it('should return the initial state', () => {
     expect(ingredientsReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle GET_INGREDIENTS_REQUEST', () => {
     const action = getIngredientsRequest();
 
-    const initialState = {
-      items: null,
-      itemsRequest: false,
-      itemsFailed: false,
-      itemsLoaded: false,
-    };
-
     const expectedState = {
-      items: null,
-      itemsRequest: true,
-      itemsFailed: false,
-      itemsLoaded: false,
+      ...initialItemsState,
     };
 
     expect(ingredientsReducer(initialState, action)).toEqual(expectedState);
@@ -44,40 +34,25 @@ describe('Ingredients Data Reducer', () => {
     ];
     const action = getIngredientsSuccess(ingredients);
 
-    const initialState = {
-      items: null,
-      itemsRequest: true,
-      itemsFailed: false,
-      itemsLoaded: false,
-    };
-
     const expectedState = {
+      ...initialItemsState,
       items: ingredients,
       itemsRequest: false,
-      itemsFailed: false,
       itemsLoaded: true,
     };
 
-    expect(ingredientsReducer(initialState, action)).toEqual(expectedState);
+    expect(ingredientsReducer(initialItemsState, action)).toEqual(expectedState);
   });
 
   it('should handle GET_INGREDIENTS_FAILED', () => {
     const action = getIngredientsFailed();
 
-    const initialState = {
-      items: null,
-      itemsRequest: true,
-      itemsFailed: false,
-      itemsLoaded: false,
-    };
-
     const expectedState = {
-      items: null,
+      ...initialItemsState,
       itemsRequest: false,
       itemsFailed: true,
-      itemsLoaded: false,
     };
 
-    expect(ingredientsReducer(initialState, action)).toEqual(expectedState);
+    expect(ingredientsReducer(initialItemsState, action)).toEqual(expectedState);
   });
 });
