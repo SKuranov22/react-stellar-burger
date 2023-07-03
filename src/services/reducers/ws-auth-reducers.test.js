@@ -1,10 +1,10 @@
-import { wsAuthReducer, initialState } from '../ws-auth-reducers';
+import { wsAuthReducer, initialState } from './ws-auth-reducers';
 import {
   WS_AUTH_CONNECTION_SUCCESS,
   WS_AUTH_CONNECTION_ERROR,
   WS_AUTH_CONNECTION_CLOSED,
   WS_GET_AUTH_ORDERS
-} from '../../actions/ws-auth-actions';
+} from '../actions/ws-auth-actions';
 
 describe('wsAuthReducer', () => {
   it('should return the initial state', () => {

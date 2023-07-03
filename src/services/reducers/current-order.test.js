@@ -1,5 +1,5 @@
-import { currentOrderReducer, initialState } from '../current-order';
-import { addCurrentOrderInfo, deleteCurrentOrderInfo } from '../../actions/current-order';
+import { currentOrderReducer, initialState } from './current-order';
+import { addCurrentOrderInfo, deleteCurrentOrderInfo } from '../actions/current-order';
 
 describe('Current Order Reducer', () => {
   it('should return the initial state', () => {

@@ -1,9 +1,9 @@
-import { ingredientsReducer, initialState } from '../ingredients-data';
+import { ingredientsReducer, initialState } from './ingredients-data';
 import {
   getIngredientsRequest,
   getIngredientsSuccess,
   getIngredientsFailed,
-} from '../../actions/ingredients-data';
+} from '../actions/ingredients-data';
 
 describe('Ingredients Data Reducer', () => {
   const initialItemsState = {

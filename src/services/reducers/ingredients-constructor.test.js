@@ -1,11 +1,11 @@
-import { ingredientsConstructorReducer, initialState } from '../ingredients-constructor';
+import { ingredientsConstructorReducer, initialState } from './ingredients-constructor';
 import {
   addIngredient,
   moveIngredient,
   deleteIngredient,
   addBuns,
   deleteAllIngredients,
-} from '../../actions/ingredients-constructor';
+} from '../actions/ingredients-constructor';
 
 describe('Ingredients Constructor Reducer', () => {
   it('should return the initial state', () => {

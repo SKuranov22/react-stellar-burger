@@ -1,11 +1,11 @@
-import { orderReducer, initialState } from '../order';
+import { orderReducer, initialState } from './order';
 import {
   getOrderNumberRequest,
   getOrderNumberSuccess,
   getOrderNumberFailed,
   addOrderItems,
   deleteOrderInfo,
-} from '../../actions/order';
+} from '../actions/order';
 
 describe('Order Reducer', () => {
   it('should return the initial state', () => {

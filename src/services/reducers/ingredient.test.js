@@ -1,5 +1,5 @@
-import { ingredientReducer, initialState } from '../ingredient';
-import { addIngredientInfo, deleteIngredientInfo } from '../../actions/ingredient';
+import { ingredientReducer, initialState } from './ingredient';
+import { addIngredientInfo, deleteIngredientInfo } from '../actions/ingredient';
 
 describe('Ingredient Reducer', () => {
   it('should return the initial state', () => {

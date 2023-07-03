@@ -1,4 +1,4 @@
-import { resetPasswordReducer, initialState } from '../reset-password';
+import { resetPasswordReducer, initialState } from './reset-password';
 import {
   verificationEmailRequest,
   verificationEmailSuccess,
@@ -6,7 +6,7 @@ import {
   resetPasswordRequest,
   resetPasswordSuccess,
   resetPasswordFailed,
-} from '../../actions/reset-password';
+} from '../actions/reset-password';
 
 describe('Reset Password Reducer', () => {
   it('should return the initial state', () => {

@@ -1,4 +1,4 @@
-import { rootReducer } from '../rootReducer';
+import { rootReducer } from './rootReducer';
 import { createStore } from 'redux';
 
 describe('Root Reducer', () => {
