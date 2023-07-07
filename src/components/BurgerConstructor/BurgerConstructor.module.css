@@ -19,6 +19,15 @@
   align-items: flex-end;
 }
 
+.fillingElement {
+  display: flex;
+  max-width: 568px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
 .addIngredient {
   display: flex;
   align-self: center;
