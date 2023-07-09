@@ -11,7 +11,7 @@ type TinitialState = {
   orderItems: string[] | [],
 };
 
-const initialState: TinitialState = {
+export const initialState: TinitialState = {
   orderNumber: null,
   orderNumberRequest: false,
   orderNumberFailed: false,

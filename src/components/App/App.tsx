@@ -12,7 +12,7 @@ import ResetPassword from '../../pages/reset-password/reset-password';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import Ingredient from '../../pages/ingredient/ingredient';
 //import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
-import { getItemsData } from '../../services/actions/ingresients-data';
+import { getItemsData } from '../../services/actions/ingredients-data';
 import {useSelector, useDispatch } from '../../types/hooks';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';

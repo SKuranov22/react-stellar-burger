@@ -1,21 +1,21 @@
 import { ingredientsConstructorReducer, initialState } from './ingredients-constructor';
 import {
   addIngredient,
-  moveIngredient,
+  moveIngredientInConstructor, // Обновлено: правильный импорт функции
   deleteIngredient,
   addBuns,
   deleteAllIngredients,
 } from '../actions/ingredients-constructor';
 
+
 describe('Ingredients Constructor Reducer', () => {
   it('should return the initial state', () => {
-
     expect(ingredientsConstructorReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle ADD_BUNS', () => {
     const buns = [{ id: '1', name: 'Bun', price: 1.99 }];
-    const action = addBuns(buns);
+    const action = { type: 'ADD_BUNS', payload: buns };
 
     const expectedState = {
       ingredients: [],
@@ -27,7 +27,7 @@ describe('Ingredients Constructor Reducer', () => {
 
   it('should handle ADD_INGREDIENT', () => {
     const ingredient = { id: '2', name: 'Tomato', price: 0.99 };
-    const action = addIngredient(ingredient);
+    const action = { type: 'ADD_INGREDIENT', payload: ingredient };
 
     const expectedState = {
       ingredients: [ingredient],
@@ -45,7 +45,7 @@ describe('Ingredients Constructor Reducer', () => {
       buns: [],
     };
 
-    const action = deleteIngredient('2');
+    const action = { type: 'DELETE_INGREDIENT', payload: '2' };
 
     const expectedState = {
       ingredients: [ingredient2],
@@ -61,7 +61,7 @@ describe('Ingredients Constructor Reducer', () => {
       buns: [{ id: '2', name: 'Bun', price: 1.99 }],
     };
 
-    const action = deleteAllIngredients();
+    const action = { type: 'DELETE_ALL_INGREDIENTS' };
 
     const expectedState = {
       ingredients: [],
@@ -79,14 +79,16 @@ describe('Ingredients Constructor Reducer', () => {
       ingredients: [ingredient1, ingredient2, ingredient3],
       buns: [],
     };
-
-    const action = moveIngredient(0, 2);
-
+  
+    const action = moveIngredientInConstructor(0, 2); // Обновлено: передача индексов как отдельных аргументов
+  
     const expectedState = {
       ingredients: [ingredient2, ingredient3, ingredient1],
       buns: [],
     };
-
+  
     expect(ingredientsConstructorReducer(initialState, action)).toEqual(expectedState);
   });
+  
 });
+

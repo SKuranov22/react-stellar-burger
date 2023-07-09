@@ -1,5 +1,6 @@
 import { userInfoReducer, initialState } from '../reducers/login';
 import {
+  TLoginData,
   userLoginRequest,
   userLoginSuccess,
   userLoginFailed,
@@ -39,7 +40,7 @@ describe('userLoginSuccess', () => {
     expect(nextState.userDataLoaded).toEqual(true);
     expect(nextState.isAuthenticated).toEqual(true);
     expect(nextState.user).toEqual(payload.user);
-    expect(nextState.accessToken).toEqual('fakeAccessToken');
+    expect(nextState.accessToken).toEqual(payload.accessToken.split('Bearer ')[1]);
     expect(nextState.refreshToken).toEqual('fakeRefreshToken');
   });
 });
@@ -159,7 +160,7 @@ describe('refreshAccessTokenSuccess', () => {
     const nextState = userInfoReducer(initialState, refreshAccessTokenSuccess(payload));
     expect(nextState.accessTokenRequest).toEqual(false);
     expect(nextState.accessTokenRequestFailed).toEqual(false);
-    expect(nextState.accessToken).toEqual('fakeAccessToken');
+    expect(nextState.accessToken).toEqual(payload.accessToken.split('Bearer ')[1]);
     expect(nextState.refreshToken).toEqual('fakeRefreshToken');
   });
 });

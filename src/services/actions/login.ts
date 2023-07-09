@@ -17,13 +17,13 @@ export const USER_DATA_UPDATE_FAILED: 'USER_DATA_UPDATE_FAILED' = 'USER_DATA_UPD
 
 export const REFRESH_ACCESS_TOKEN_REQUEST: 'REFRESH_ACCESS_TOKEN_REQUEST' = 'REFRESH_ACCESS_TOKEN_REQUEST';
 export const REFRESH_ACCESS_TOKEN_SUCCESS: 'REFRESH_ACCESS_TOKEN_SUCCESS' = 'REFRESH_ACCESS_TOKEN_SUCCESS';//рефрешим accessToken и отправляем запрос на данные
-export const REFRESH_ACCESS_TOKEN_FAILED: 'REFRESH_ACCESS_TOKEN_FAILED' = 'REFRESH_ACCESS_TOKEN_FAILED';//идем на страницу логина
+export const REFRESH_ACCESS_TOKEN_REQUEST_FAILED: 'REFRESH_ACCESS_TOKEN_REQUEST_FAILED' = 'REFRESH_ACCESS_TOKEN_REQUEST_FAILED';
 
 //типизация экшенов
 export interface IUserLoginRequest {
   readonly type: typeof USER_LOGIN_REQUEST;
 }
-type TLoginData = {
+export type TLoginData = {
   accessToken: string,
   refreshToken: string,
   success: boolean,
@@ -74,7 +74,7 @@ export interface IRefreshAccessTokenSuccess {
   payload: TLoginData
 }
 export interface IRefreshAccessTokenFailed {
-  readonly type: typeof REFRESH_ACCESS_TOKEN_FAILED;
+  readonly type: typeof REFRESH_ACCESS_TOKEN_REQUEST_FAILED;
 }
 
 // Объединение типов
@@ -140,7 +140,7 @@ export const refreshAccessTokenSuccess = (payload: TLoginData): IRefreshAccessTo
   payload
 });
 export const refreshAccessTokenFailed = (): IRefreshAccessTokenFailed => ({
-  type: REFRESH_ACCESS_TOKEN_FAILED,
+  type: REFRESH_ACCESS_TOKEN_REQUEST_FAILED,
 });
 //----------------------------------------------------------------
 

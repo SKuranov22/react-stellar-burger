@@ -16,9 +16,7 @@ describe('Root Reducer', () => {
         buns: [],
       },
       ingredientInformation: {
-        ingredient: null,
-        ingredientRequest: false,
-        ingredientFailed: false,
+        information: null,
       },
       orderInformation: {
         orderNumber: null,
@@ -54,24 +52,25 @@ describe('Root Reducer', () => {
       },
       wsOrders: {
         wsConnected: false,
-        orders: [],
-        total: null,
-        totalToday: null,
+        orders: null,
+        total: 0,
+        totalToday: 0,
+        wsError: undefined,
       },
       wsAuthOrders: {
         wsAuthConnected: false,
-        orders: [],
+        orders: null,
         total: null,
         totalToday: null,
+        wsAuthError: undefined,
       },
       currentOrder: {
-        order: null,
-        orderRequest: false,
-        orderFailed: false,
+        information: null,
       },
     };
-
+    
     expect(store.getState()).toEqual(expectedState);
+    
   });
 
 });

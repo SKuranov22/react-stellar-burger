@@ -15,7 +15,7 @@ type TinitialState = {
   totalToday: number
 }
 
-const initialState: TinitialState = {
+export const initialState: TinitialState = {
   wsConnected: false,
   wsError: undefined,
   orders: null,

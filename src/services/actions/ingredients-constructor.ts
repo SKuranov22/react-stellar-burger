@@ -57,9 +57,9 @@ export const deleteIngredient = (payload: string): IDeleteIngredient => ({
   payload
 });
 
-export const moveIngredientInConstructor = (payload: IngredientOrder): IIngredientMove => ({
+export const moveIngredientInConstructor = (startIndex: number, endIndex: number): IIngredientMove => ({
   type: INGREDIENT_MOVE,
-  payload
+  payload: { dragIndex: startIndex, hoverIndex: endIndex }
 });
 
 export const addBunsInConstructor = (payload: Array<TIngredient>): IAddBuns => ({
