@@ -1,5 +1,5 @@
-import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILED } from '../actions/ingresients-data';
-import { TIngredientsDataActions } from '../actions/ingresients-data';
+import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILED } from '../actions/ingredients-data';
+import { TIngredientsDataActions } from '../actions/ingredients-data';
 import { TIngredient } from '../../types/types';
 
 // список всех полученных ингредиентов,
@@ -10,7 +10,7 @@ type TInitialState = {
   itemsLoaded: boolean,
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   items: null,
   itemsRequest: false,
   itemsFailed: false,

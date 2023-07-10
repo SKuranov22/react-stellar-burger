@@ -58,7 +58,7 @@ export const deleteOrderInfo = (): IDeleteOrderInfo => ({
   type: DELETE_ORDER_INFO 
 });
 
-export const addOrderitems = (payload: string[]): IAddOrderItems => ({
+export const addOrderItems = (payload: string[]): IAddOrderItems => ({
   type: ADD_ORDER_ITEMS,
   payload
 });

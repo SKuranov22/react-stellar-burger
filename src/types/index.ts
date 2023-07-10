@@ -4,7 +4,7 @@ import { store } from "../services/store";
 import { TCurrentOrderActions } from "../services/actions/current-order";
 import { TIngredientInfoActions } from "../services/actions/ingredient";
 import { TIngrediensConstructorActions } from "../services/actions/ingredients-constructor";
-import { TIngredientsDataActions } from "../services/actions/ingresients-data";
+import { TIngredientsDataActions } from "../services/actions/ingredients-data";
 import { TLoginActions } from "../services/actions/login";
 import { TOrderActions } from "../services/actions/order";
 import { TResetPasswordActions } from "../services/actions/reset-password";

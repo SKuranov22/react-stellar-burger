@@ -44,7 +44,7 @@ const FillingElement: FC<TFillingElement> = ({ data, index, id }) => {
         return;
       }
  
-      dispatch(moveIngredientInConstructor({ dragIndex, hoverIndex }))
+      dispatch(moveIngredientInConstructor(dragIndex, hoverIndex));
 
       item.index = hoverIndex;
     },

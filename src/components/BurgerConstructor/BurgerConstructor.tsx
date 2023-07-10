@@ -8,7 +8,7 @@ import BunElement from './BunElement/BunElement';
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { useDispatch, useSelector } from '../../types/hooks';
 import { addIngredientInConstructor, addBunsInConstructor, deleteAllIngredients } from '../../services/actions/ingredients-constructor';
-import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
+import { addOrderItems, deleteOrderInfo } from '../../services/actions/order';
 import { sentOrderInformation } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from "uuid";
@@ -41,7 +41,7 @@ const BurgerConstructor: FC = () => {
     }
     if (isAuthenticated) {
       const orderArray = [...constructorIngredients, ...constructorBuns].map(item => item._id);
-      dispatch(addOrderitems(orderArray));
+      dispatch(addOrderItems(orderArray));
       dispatch(sentOrderInformation(orderArray));
       setModalActive(true);
     }

@@ -10,7 +10,7 @@ type TInitialState = {
   buns: Array<TIngredient> | []
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   ingredients: [],
   buns: []
 }

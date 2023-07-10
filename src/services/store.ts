@@ -46,4 +46,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 //создаем стор где будет все храниться
 const enhancers = composeEnhancers(applyMiddleware(thunk, socketMiddleware(`${wsUrl}/orders`, wsAuthActions, true), socketMiddleware(`${wsUrl}/orders/all`, wsActions, false),));
+
+
 export const store = createStore(rootReducer, enhancers);
+(window as any).store = store;
+
